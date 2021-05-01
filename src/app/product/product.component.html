@@ -1,0 +1,77 @@
+<form #newProductForm="ngForm" (ngSubmit)="onSubmit(newProductForm)">
+    <div class="form-group">
+        <label for="productName">Product name:</label>
+        <input type="text" class="form-control" placeholder="Enter product Name" id="productName" 
+        ngModel name="productName" required maxlength="50">
+    </div>
+    <div class="form-group">
+        <label for="productId">Product Id:</label>
+        <input type="text" class="form-control" placeholder="Enter product Id" id="productId" 
+        ngModel name="productId" required maxlength="13">
+    </div>
+    <div class="form-group">
+        <label for="productManager">Product manager:</label>
+        <input type="text" class="form-control" placeholder="Enter product manager" id="productManager" 
+        ngModel name="productManager" maxlength="30">
+    </div>
+    <div class="form-group">
+        <label for="salesStartDate">Sales start date:</label>
+        <input type="text" class="form-control" placeholder="Ebter sales start date" id="salesStartDate" 
+        ngModel name="salesStartDate" required maxlength="10">
+    </div>
+    
+    
+    <button class="btn btn-primary" [disabled]="!newProductForm.valid" type="submit">Add New Product</button>
+</form>
+
+<div class="container" *ngIf="products && products.length > 0">
+    <h2>Products</h2>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+            <th >
+                Product name
+            </th>
+            <th >
+                Product ID
+            </th>
+            <th >
+                Product manager
+            </th>
+            <th >
+                Sales start date
+            </th>
+            <td></td>
+        
+        </tr>
+    </thead>
+    <tbody>
+
+        <ng-container *ngFor="let p of products; index as i;">
+            <tr>
+                <ng-container *ngIf="enableEditIndex != i">
+                <td>{{p.productName}}</td>
+                <td>{{p.productId}}</td>
+                <td>{{p.productManager}}</td>
+                <td>{{p.salesStartDate}}</td>
+                <td *ngIf="enableEditIndex != i">
+                  <button type="button" (click)="switchEditMode(i)">Edit</button>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="enableEditIndex == i">
+                <td><input [(ngModel)]="p.productName" /></td>
+                <td><input [(ngModel)]="p.productId" /></td>
+                <td><input [(ngModel)]="p.productManager" /></td>
+                <td><input [(ngModel)]="p.salesStartDate" /></td>
+                <td><button (click)="save()">Update</button></td>
+              </ng-container>
+            </tr>
+          </ng-container>
+
+
+
+    </tbody>
+</table>
+</div>
+

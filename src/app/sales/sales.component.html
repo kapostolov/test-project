@@ -1,0 +1,34 @@
+<div class="container">
+  <h2>Sales</h2>
+
+  <button type="button" (click)="add()">Add</button>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns" [attr.rowspan]="col.subHeaders?.length > 0 ? 1 : 2"
+          [attr.colspan]="col.subHeaders?.length > 0 ? col.subHeaders.length : 1"
+          (click)="sort(col)">
+          {{ col.header }}
+        </th>
+      </tr>
+
+      <tr>
+        <th *ngFor="let subHeader of subHeaders">
+          {{ subHeader.field }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of data">
+        <td>{{ d.productID }}</td>
+        <td>{{ d.productName }}</td>
+        <td>{{ d.salesQ1 }}</td>
+        <td>{{ d.salesQ2 }}</td>
+        <td>{{ d.salesQ3 }}</td>
+        <td>{{ d.salesQ4 }}</td>
+        <td>{{ d['Total sales'] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
