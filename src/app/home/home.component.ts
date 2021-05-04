@@ -7,16 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  logged = localStorage.getItem('logged');
+  
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-  navigateToNewProduct(){
-    this.router.navigate(['/new-product']);
-  }
-
-  navigateToSales(){
-    this.router.navigate(['/sales']);
-  }
+  
 }
